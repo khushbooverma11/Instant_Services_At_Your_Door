@@ -53,7 +53,7 @@ export const employeeReducer=(state={employees:[]},action)=>{
 
 
 
-export const employeeDetailReducer=(state={employees:{}},action)=>{
+export const employeeDetailReducer=(state={employee:{}},action)=>{
 
   switch (action.type) {
       case EMPLOYEE_DETAILS_REQUEST:

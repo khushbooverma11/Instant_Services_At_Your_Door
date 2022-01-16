@@ -12,7 +12,7 @@ import {
 export const getEmployee=()=> async (dispatch) => {
     try {
       dispatch({ type: ALL_EMPLOYEE_REQUEST });
-const {data}=await axios.get("/api/v1/Employee");
+      const {data}=await axios.get("/api/v1/Employee");
      // console.log(data);
 
       
@@ -32,7 +32,7 @@ const {data}=await axios.get("/api/v1/Employee");
   export const getEmployeeDetails =(id)=> async (dispatch) => {
     try {
       dispatch({ type: EMPLOYEE_DETAILS_REQUEST });
-const {data}=await axios.get(`/api/v1/Employee/${id}`);
+      const {data}=await axios.get(`/api/v1/Employee/${id}`);
      
       dispatch({
         type: EMPLOYEE_DETAILS_SUCCESS,

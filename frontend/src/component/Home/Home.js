@@ -1,9 +1,9 @@
 import React, { Fragment ,useEffect} from 'react'
 import {CgMouse} from 'react-icons/all'
 import '../Home/Home.css'
-import Employee from '../Home/Employee.js';
+import Employee from '../Home/EmployeeCard.js';
 import MetaData from "../layout/MetaData";
-import {getEmployee} from"../../actions/employeeAction";
+import {clearErrors, getEmployee} from"../../actions/employeeAction";
 import { useSelector,useDispatch } from 'react-redux';
 import Loader from "../layout/Loader/Loader"
 import {useAlert} from "react-alert";
@@ -18,7 +18,8 @@ const Home = () => {
     console.log(employeeCount);
    useEffect(() => {
        if(error){
-           return alert.error(error);
+        alert.error(error);
+        dispatch(clearErrors());
        }
         dispatch(getEmployee());
         

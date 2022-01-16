@@ -25,7 +25,10 @@ exports.getAllEmployee = catchAsyncErrors(async (req,res,next)=>{
     const ApiFeature=new ApiFeatures(Employee.find(),req.query).search().filter().pagination(resultPage);
     const Emp = await ApiFeature.query;
 
-    res.status(200).json({Emp,employeeCount});
+    res.status(200).json({
+      success:true,
+      Emp,
+      employeeCount});
 });
 
 //getEmployee detail
@@ -36,7 +39,9 @@ exports.getEmployeeDetail = catchAsyncErrors(async(req,res,next)=>{
     if(!employee){
         return next(new ErrorHandler("Employee Not Exists",404));
     }
-    res.status(200).json({employee});
+    res.status(200).json({
+      success:true,
+      employee});
     
 });
 //update Employee --Admin
