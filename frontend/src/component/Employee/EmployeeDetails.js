@@ -11,6 +11,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import reactStars from "react-rating-stars-component";
+import MetaData from "../layout/MetaData";
 
 
 
@@ -52,6 +53,7 @@ const EmployeeDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
+          <MetaData title={employee.name}/>
           <div className="EmployeeDetails">
             <div>
     

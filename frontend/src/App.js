@@ -7,8 +7,10 @@ import Home from './component/Home/Home.js'
 import { BrowserRouter as Router,Route ,Switch} from 'react-router-dom';
 import WebFont from "webfontloader";
 import Loader from './component/layout/Loader/Loader';
-import EmployeeDetails from "./component/Employee/EmployeeDetails.js"
-
+import EmployeeDetails from "./component/Employee/EmployeeDetails.js";
+import Employees from "./component/Employee/Employees";
+import Search from "./component/Employee/Search.js"
+import LoginSignUp from './component/User/LoginSignUp';
 
 function App() {
 
@@ -25,9 +27,12 @@ function App() {
     <Router>
       
       <Header/>
-   <Route  exact path="/" component={Home}/>
-   <Route  exact path="/Employee/:id" component={EmployeeDetails}/>
-   
+    <Route  exact path="/" component={Home}/>
+    <Route  exact path="/Employee/:id" component={EmployeeDetails}/>
+    <Route exact path="/Employees" component={Employees}/>
+    <Route  path="/Employees/:keyword" component={Employees}/>
+    <Route exact path="/search" component={Search} />
+    <Route exact path="/login" component={LoginSignUp}/>
       
       <Footer/>
 

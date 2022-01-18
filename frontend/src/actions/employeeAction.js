@@ -9,14 +9,20 @@ import {
     CLEAR_ERRORS,
 } from "../constants/employeeConstants";
 // Get All Products
-export const getEmployee=()=> async (dispatch) => {
+export const getEmployee=(keyword="",currentPage = 1,charge =[0,25000],category,ratings="0")=> 
+async (dispatch) => {
     try {
       dispatch({ type: ALL_EMPLOYEE_REQUEST });
-      const {data}=await axios.get("/api/v1/Employee");
-     // console.log(data);
-
       
 
+      let link = `/api/v1/Employees?keyword=${keyword}&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&ratings[gte]=${ratings}`;
+  
+      if(category)
+      {
+        link=`/api/v1/Employees?keyword=${keyword}&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&category=${category}&ratings[gte]=${ratings}`
+      }
+      const {data}=await axios.get(link);
+      //console.log(data);
       dispatch({
         type: ALL_EMPLOYEE_SUCCESS,
         payload: data,

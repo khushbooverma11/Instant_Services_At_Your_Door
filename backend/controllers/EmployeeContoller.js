@@ -19,16 +19,25 @@ exports.createEmployee = catchAsyncErrors(async (req,res,next)=>{
 //Get All Employee
 exports.getAllEmployee = catchAsyncErrors(async (req,res,next)=>{
  
-  const resultPage=8;
+  const resultPerPage=8;
     const employeeCount=await Employee.countDocuments();
     
-    const ApiFeature=new ApiFeatures(Employee.find(),req.query).search().filter().pagination(resultPage);
-    const Emp = await ApiFeature.query;
+    const apiFeature=new ApiFeatures(Employee.find(),req.query).search().filter()
+    
+    let employees = await apiFeature.query;
+
+    let filteredEmployeeCount = employees.length;
+    
+   
+    apiFeature.pagination(resultPerPage);
+    employees= await apiFeature.query.clone();
 
     res.status(200).json({
       success:true,
-      Emp,
-      employeeCount});
+      employees,
+      employeeCount,
+      resultPerPage,
+      filteredEmployeeCount});
 });
 
 //getEmployee detail

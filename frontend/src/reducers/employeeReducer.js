@@ -21,10 +21,10 @@ export const employeeReducer=(state={employees:[]},action)=>{
         case ALL_EMPLOYEE_SUCCESS:
           return {
             loading: false,
-           employees: action.payload.Emp,
-           employeeCount: action.payload.employeeCount,
-           // resultPerPage: action.payload.resultPerPage,
-           // filteredProductsCount: action.payload.filteredProductsCount,
+           employees: action.payload.employees, //will change it to employees after adition of new data
+           employeesCount: action.payload.employeeCount,
+           resultPerPage: action.payload.resultPerPage,
+           filteredProductsCount: action.payload.filteredEmployeesCount,
           };
     
        /* case ADMIN_PRODUCT_SUCCESS:

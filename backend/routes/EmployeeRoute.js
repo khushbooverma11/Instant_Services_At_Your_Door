@@ -12,7 +12,7 @@ const {  createEmployee,
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
 
-router.route("/Employee").get(getAllEmployee);
+router.route("/Employees").get(getAllEmployee);
 
 router.route("/Employee/new").post(isAuthenticatedUser,authorizeRoles("admin"),createEmployee);
 
