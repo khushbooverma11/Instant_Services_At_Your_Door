@@ -43,7 +43,7 @@ const Employees = ({match}) => {
       employees,
       loading,
       error,
-     
+      employeesCount,
       resultPerPage,
       filteredEmployeesCount
     } = useSelector((state) => state.employees);
