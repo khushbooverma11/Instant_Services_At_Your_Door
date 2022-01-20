@@ -12,7 +12,7 @@ exports.newAppointment=catchAsyncErrors(async(req,res,next)=>{
         paymentInfo,
         totalPrice,
       } = req.body;
-         await Employee.findOneAndUpdate({_id:req.body.appointedEmployee.employee},{availablity:false});
+         await Employee.findOneAndUpdate({_id:req.body.appointedEmployee.employee},{availability:false});
       const appointment= await Appointment.create({
         addressInfo,
         appointedEmployee,
@@ -96,7 +96,7 @@ exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
 
   if (req.body.status === "completed") {
     appointment.completed =true;
-    await Employee.findOneAndUpdate({_id:appointment.appointedEmployee.employee},{availablity:true});
+    await Employee.findOneAndUpdate({_id:appointment.appointedEmployee.employee},{availability:true});
   }
 
   await appointment.save({ validateBeforeSave: false });

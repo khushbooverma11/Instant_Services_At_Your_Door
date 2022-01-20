@@ -1,5 +1,6 @@
 import React ,{useState,Fragment} from 'react'
 import './Search.css'
+import MetaData from "../layout/MetaData";
 const Search = ({ history }) => {
 
     const [keyword,setKeyword] = useState("");

@@ -6,15 +6,15 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserOptions = ({ user }) => {
+  const { bookWorkers } = useSelector((state) => state.book);
   
-
   const [open, setOpen] = useState(false);
   const history = useHistory();
   const alert = useAlert();
@@ -23,7 +23,15 @@ const UserOptions = ({ user }) => {
   const options = [
     { icon: <ListAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
-    
+    {
+      icon: (
+        <ShoppingCartIcon
+          style={{ color: bookWorkers.length > 0 ? "tomato" : "unset" }}
+        />
+      ),
+      name: `Book(${bookWorkers.length})`,
+      func: book,
+    },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
   ];
 
@@ -44,6 +52,9 @@ const UserOptions = ({ user }) => {
   }
   function account() {
     history.push("/account");
+  }
+  function book() {
+    history.push("/book");
   }
  
   function logoutUser() {

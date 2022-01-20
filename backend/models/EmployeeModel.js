@@ -35,7 +35,7 @@ const EmployeeSchema =  new mongoose.Schema({
         type: String,
         required: [true, "Please Enter Service Category"],
       },
-      availablity: {
+      availability: {
         type:Boolean,
         default: true,
       },

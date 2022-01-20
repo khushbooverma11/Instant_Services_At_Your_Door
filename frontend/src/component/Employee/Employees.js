@@ -1,5 +1,5 @@
-import React, { Fragment,useEffect,useState } from 'react'
-import  "./Employees.css"
+import React, { Fragment,useEffect,useState } from 'react';
+import  "./Employees.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
@@ -11,7 +11,7 @@ import {
 import ReviewCard from "./ReviewCard.js";
 import EmployeeCard from "../Home/EmployeeCard"
 import Loader from "../layout/Loader/Loader";
-import Pagination from "react-js-pagination"
+import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import {useAlert} from "react-alert";
@@ -43,9 +43,9 @@ const Employees = ({match}) => {
       employees,
       loading,
       error,
-      employeesCount,
+      employeeCount,
       resultPerPage,
-      filteredEmployeesCount
+      filteredEmployeeCount
     } = useSelector((state) => state.employees);
 
     const keyword =match.params.keyword;
@@ -60,14 +60,22 @@ const Employees = ({match}) => {
       };
 
     useEffect(() => {
+      if (error) {
+        alert.error(error);
+        dispatch(clearErrors());
+      }
+
       
         dispatch(getEmployee(keyword,currentPage,charge,category,ratings))
-    }, [dispatch,keyword,currentPage,charge,category,ratings]);
+    }, [dispatch,keyword,currentPage,charge,category,alert,error,ratings]);
 
-    let count = filteredEmployeesCount;
+    let count = filteredEmployeeCount;
     return (
-        <Fragment>
-            {loading?<Loader/>:<Fragment>
+      <Fragment>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Fragment>
               <MetaData title="EMPLOYEES"/>
                  <h2 className="employeesHeading">Employees</h2>
 
@@ -119,12 +127,12 @@ const Employees = ({match}) => {
             </fieldset>
                </div>
 
-                 {resultPerPage < count && (
-                 <div className="paginationBox">
+          {resultPerPage < count && (
+             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={resultPerPage}
-                totalItemsCount={employeesCount}
+                totalItemsCount={employeeCount}
                 onChange={setCurrentPageNo}
                 nextPageText="Next"
                 prevPageText="Prev"
@@ -135,8 +143,10 @@ const Employees = ({match}) => {
                 activeClass="pageItemActive"
                 activeLinkClass="pageLinkActive"
               />
-            </div>)}
-                </Fragment>}
+            </div>
+            )}
+                </Fragment>
+            )}
         </Fragment>
     )
 }

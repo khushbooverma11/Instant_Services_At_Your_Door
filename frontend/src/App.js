@@ -17,7 +17,14 @@ import UserOptions from "./component/layout/Header/UserOptions.js";
 import { useSelector } from 'react-redux';
 import Profile from "./component/User/Profile.js";
 import ProtectedRoute from './component/Route/ProtectedRoute';
-import  UpdateProfile  from"./component/User/UpdateProfile.js";
+import UpdateProfile  from"./component/User/UpdateProfile";
+import UpdatePassword from "./component/User/UpdatePassword";
+import ForgotPassword from "./component/User/ForgotPassword";
+import ResetPassword from "./component/User/ResetPassword";
+import Book from "./component/Book/Book";
+import Shipping from "./component/Book/Shipping";
+
+
 
 function App() {
   
@@ -47,8 +54,20 @@ function App() {
     <Route exact path="/search" component={Search} />
     <ProtectedRoute exact path="/account"component={Profile}/>
     <ProtectedRoute exact path="/me/update"component={UpdateProfile}/>
+    <ProtectedRoute
+          exact
+          path="/password/update"
+          component={UpdatePassword}
+        />
+
+ <Route exact path="/password/forgot" component={ForgotPassword} />
+ <Route exact path="/password/reset/:token" component={ResetPassword} />
+
+
     <Route exact path="/login" component={LoginSignUp}/>
-      
+    <Route exact path="/book" component={Book} />  
+    <ProtectedRoute exact path="/shipping" component={Shipping} />
+   
       <Footer/>
 
       </Router>

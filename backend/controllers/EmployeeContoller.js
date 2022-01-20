@@ -19,7 +19,7 @@ exports.createEmployee = catchAsyncErrors(async (req,res,next)=>{
 //Get All Employee
 exports.getAllEmployee = catchAsyncErrors(async (req,res,next)=>{
  
-  const resultPerPage=8;
+  const resultPerPage=4;
     const employeeCount=await Employee.countDocuments();
     
     const apiFeature=new ApiFeatures(Employee.find(),req.query).search().filter()

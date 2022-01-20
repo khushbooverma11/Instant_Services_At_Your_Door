@@ -12,6 +12,7 @@ import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import reactStars from "react-rating-stars-component";
 import MetaData from "../layout/MetaData";
+import { addWorkersToBook} from "../../actions/bookAction";
 
 
 
@@ -35,6 +36,10 @@ const EmployeeDetails = ({ match }) => {
     size: window.innerWidth<600?20:25,
     value: employee.ratings,
     isHalf:true,
+  };
+  const addToBookHandler = () => {
+    dispatch(addWorkersToBook(match.params.id));
+    alert.success("Appointment Booked");
   };
 
 
@@ -84,15 +89,15 @@ const EmployeeDetails = ({ match }) => {
                 <h1>{`₹${employee.charge}`}</h1>
                 <div className="detailsBlock-3-1">
                   
-                  <button>
+                  <button onClick={addToBookHandler}>
                     Book Appointment
                   </button>
                 </div>
 
                 <p>
                   Status:
-                  <b className={employee.availability < 1 ? "redColor" : "greenColor"}>
-                    {employee.availability < 1 ? "NotAvailable" : "Available"}
+                  <b className={employee.availability == false ? "redColor" : "greenColor"}>
+                    {employee.availability == false ? "NotAvailable" : "Available"}
                   </b>
                 </p>
               </div>
