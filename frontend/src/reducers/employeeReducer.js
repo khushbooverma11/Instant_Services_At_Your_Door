@@ -24,7 +24,7 @@ export const employeeReducer=(state={employees:[]},action)=>{
            employees: action.payload.employees, //will change it to employees after adition of new data
            employeesCount: action.payload.employeeCount,
            resultPerPage: action.payload.resultPerPage,
-           filteredProductsCount: action.payload.filteredEmployeesCount,
+           filteredEmployeesCount: action.payload.filteredEmployeesCount,
           };
     
        /* case ADMIN_PRODUCT_SUCCESS:

@@ -8,14 +8,15 @@ const Employee = require("../models/EmployeeModel");
 exports.newAppointment=catchAsyncErrors(async(req,res,next)=>{
     const {
         addressInfo,
-        appointedEmployee,
+        appointedEmployees,
         paymentInfo,
         totalPrice,
       } = req.body;
-         await Employee.findOneAndUpdate({_id:req.body.appointedEmployee.employee},{availability:false});
+
+         //await Employee.findOneAndUpdate({_id:req.body.appointedEmployee.employee},{availability:false});
       const appointment= await Appointment.create({
         addressInfo,
-        appointedEmployee,
+        appointedEmployees,
         paymentInfo,
         totalPrice,
         paidAt: Date.now(),

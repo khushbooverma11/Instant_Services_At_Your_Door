@@ -9,7 +9,7 @@ import { useAlert } from "react-alert";
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 
-const UpdateProfile = ({ history }) => {
+const UpdateProfile = ({ history,location }) => {
   const dispatch = useDispatch();
   const alert = useAlert();
 

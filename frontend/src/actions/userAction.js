@@ -33,7 +33,7 @@ export const login =(email,password) => async(dispatch)=>{
       const config = { headers: { "Content-Type": "application/json" } };
 
       const { data }= await axios.post(
-          `api/v1/login`,
+          `/api/v1/login`,
           {email,password},
           config
           );
@@ -57,7 +57,7 @@ export const register =(userData) => async(dispatch)=>{
         const config = { headers: { "Content-Type": "multipart/form-data" } };
         
         const { data }= await axios.post(
-            `api/v1/register`,
+            `/api/v1/register`,
             userData,
             config
             );
@@ -79,7 +79,7 @@ export const register =(userData) => async(dispatch)=>{
   
         //const config = { headers: { "Content-Type": "application/json" } };
   
-        const { data }= await axios.get(`api/v1/me`);
+        const { data }= await axios.get(`/api/v1/me`);
   
         dispatch({ 
             type: LOAD_USER_SUCCESS,
@@ -95,7 +95,7 @@ export const register =(userData) => async(dispatch)=>{
 //LogOut
 export const logout =() => async(dispatch)=>{
   try{
-      const { data }= await axios.get(`api/v1/logout`,);
+      const { data }= await axios.get(`/api/v1/logout`,);
       
       dispatch({ 
           type: LOGOUT_SUCCESS,

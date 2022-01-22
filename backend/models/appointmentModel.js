@@ -29,28 +29,27 @@ const appointmentSchema = new mongoose.Schema({
             required: true,
           }},
           
-        appointedEmployee:{
-          name:{
-            type:String,
-            required:true,
-          },
-          charge:{
-             type:Number,
-             required:true,
-          },
-          image:{
-            type: String,
-            required: true,
-
-          },
-          employee:{
-            type: mongoose.Schema.ObjectId,
-            ref:"Employee",
-            required:true,
-          }
-
-        },
-      
+          appointedEmployees: [
+            {
+              name: {
+                type: String,
+                required: true,
+              },
+              charge: {
+                type: Number,
+                required: true,
+              },
+              image: {
+                type: String,
+                required: true,
+              },
+              employee: {
+                type: mongoose.Schema.ObjectId,
+                ref: "Employee",
+                required: true,
+              },
+            },
+          ],
       user: {
         type: mongoose.Schema.ObjectId,
         ref: "User",

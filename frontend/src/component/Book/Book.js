@@ -17,7 +17,7 @@ const Book = ({history}) => {
   };
 
   const checkoutHandler = () => {
-    history.push("/login?redirect=shipping");
+    history.push("/login?redirect=appointing");
   };
 
   return (

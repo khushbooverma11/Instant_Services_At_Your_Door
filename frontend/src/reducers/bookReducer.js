@@ -1,11 +1,11 @@
 import {
     BOOK_APPOINTMENT,
     REMOVE_BOOK_WORKER,
-    SAVE_SHIPPING_INFO,
+    SAVE_APPOINTING_INFO,
     
   } from "../constants/bookConstants";
   export const bookReducer = (
-    state = { bookWorkers: []},
+    state = { bookWorkers: [],appointingInfo:{}},
     action
   ) => {
     switch (action.type) {
@@ -36,10 +36,10 @@ import {
           bookWorkers: state.bookWorkers.filter((i) => i.employee !== action.payload),
         };
   
-     case SAVE_SHIPPING_INFO:
+     case SAVE_APPOINTING_INFO:
         return {
           ...state,
-          shippingInfo: action.payload,
+          appointingInfo: action.payload,
         };
   
       default:

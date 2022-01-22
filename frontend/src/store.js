@@ -4,6 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { employeeDetailReducer, employeeReducer } from "./reducers/employeeReducer";
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { bookReducer } from "./reducers/bookReducer";
+import { newAppointmentReducer } from "./reducers/appointmentReducer";
 
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
     profile:profileReducer,
     forgotPassword:forgotPasswordReducer,
     book:bookReducer,
+    newAppointment:newAppointmentReducer
   });
 
 
@@ -22,6 +24,9 @@ const reducer = combineReducers({
       bookWorkers: localStorage.getItem("bookWorkers")
         ? JSON.parse(localStorage.getItem("bookWorkers"))
         : [],
+      appointingInfo: localStorage.getItem("appointingInfo")
+      ? JSON.parse(localStorage.getItem('appointingInfo'))
+      : {},
       },
   };
   

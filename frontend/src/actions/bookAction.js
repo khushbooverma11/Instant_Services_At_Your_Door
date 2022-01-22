@@ -1,7 +1,7 @@
 import {
     BOOK_APPOINTMENT,
     REMOVE_BOOK_WORKER,
-    SAVE_SHIPPING_INFO,
+    SAVE_APPOINTING_INFO,
     
   } from "../constants/bookConstants";
   import axios from "axios";
@@ -32,12 +32,12 @@ export const removeWorkersFromBook = (id) => async (dispatch, getState) => {
 
   localStorage.setItem("bookWorkers", JSON.stringify(getState().book.bookWorkers));
 };
-// SAVE SHIPPING INFO
-export const saveShippingInfo = (data) => async (dispatch) => {
+// SAVE APPOINTING INFO
+export const saveAppointingInfo = (data) => async (dispatch) => {
   dispatch({
-    type: SAVE_SHIPPING_INFO,
+    type: SAVE_APPOINTING_INFO,
     payload: data,
   });
 
-  localStorage.setItem("shippingInfo", JSON.stringify(data));
+  localStorage.setItem("appointingInfo", JSON.stringify(data));
 };

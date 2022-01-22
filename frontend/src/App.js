@@ -1,5 +1,5 @@
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import React from 'react';
 import Header from './component/layout/Header/Header.js';
 import Footer from './component/layout/Footer/Footer';
@@ -22,17 +22,30 @@ import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Book from "./component/Book/Book";
-import Shipping from "./component/Book/Shipping";
-
+import Appointing from "./component/Book/Appointing.js";
+import ConfirmAppointment from './component/Book/ConfirmAppointment';
+import Payment from './component/Book/Payment';
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js"
+import AppointmentSuccess from "./component/Book/AppointmentSuccess";
 
 
 function App() {
   
-  const{isAuthenticated,user}=useSelector(state=>state.user)
+  const{isAuthenticated,user}=useSelector(state=>state.user);
 
+  const [stripeApiKey,setStripeApiKey] = useState("");
+
+  async function getStripeApikey() {
+
+    const {data} = await axios.get("/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
 
   //For setting web fonts before loading
-  React.useEffect(() => {
+  useEffect(() => {
     WebFont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
@@ -40,6 +53,9 @@ function App() {
     });
 
     store.dispatch(loadUser());
+
+    getStripeApikey();
+
     }, []);
 
   return (
@@ -54,20 +70,22 @@ function App() {
     <Route exact path="/search" component={Search} />
     <ProtectedRoute exact path="/account"component={Profile}/>
     <ProtectedRoute exact path="/me/update"component={UpdateProfile}/>
-    <ProtectedRoute
-          exact
-          path="/password/update"
-          component={UpdatePassword}
-        />
-
- <Route exact path="/password/forgot" component={ForgotPassword} />
- <Route exact path="/password/reset/:token" component={ResetPassword} />
-
-
+    <ProtectedRoute exact path="/password/update"omponent={UpdatePassword}/>
+    <Route exact path="/password/forgot" component={ForgotPassword} />
+    <Route exact path="/password/reset/:token" component={ResetPassword} />
     <Route exact path="/login" component={LoginSignUp}/>
-    <Route exact path="/book" component={Book} />  
-    <ProtectedRoute exact path="/shipping" component={Shipping} />
-   
+    <Route exact path="/book" component={Book} /> 
+
+    <ProtectedRoute exact path="/appointing" component={Appointing} />
+    <ProtectedRoute exact path="/appointment/confirm" component={ConfirmAppointment} />
+    {stripeApiKey && (
+      <Elements stripe={loadStripe(stripeApiKey)}>
+      <ProtectedRoute exact path="/process/payment" component={Payment} />
+       </Elements>
+    )}
+
+   <ProtectedRoute exact path="/success" component={AppointmentSuccess} />
+    
       <Footer/>
 
       </Router>

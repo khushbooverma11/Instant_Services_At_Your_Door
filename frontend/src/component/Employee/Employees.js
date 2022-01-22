@@ -43,13 +43,15 @@ const Employees = ({match}) => {
       employees,
       loading,
       error,
-      employeeCount,
+      employeesCount,
       resultPerPage,
-      filteredEmployeeCount
+      filteredEmployeesCount
     } = useSelector((state) => state.employees);
 
     const keyword =match.params.keyword;
-    
+    console.log(employeesCount);
+    console.log(filteredEmployeesCount);
+    console.log(resultPerPage);
 
     const setCurrentPageNo = (e) => {
         setCurrentPage(e);
@@ -69,7 +71,7 @@ const Employees = ({match}) => {
         dispatch(getEmployee(keyword,currentPage,charge,category,ratings))
     }, [dispatch,keyword,currentPage,charge,category,alert,error,ratings]);
 
-    let count = filteredEmployeeCount;
+    let count = filteredEmployeesCount;
     return (
       <Fragment>
         {loading ? (
@@ -127,12 +129,12 @@ const Employees = ({match}) => {
             </fieldset>
                </div>
 
-          {resultPerPage < count && (
-             <div className="paginationBox">
+            {resultPerPage < count && (
+              <div className="paginationBox">
               <Pagination
                 activePage={currentPage}
                 itemsCountPerPage={resultPerPage}
-                totalItemsCount={employeeCount}
+                totalItemsCount={employeesCount}
                 onChange={setCurrentPageNo}
                 nextPageText="Next"
                 prevPageText="Prev"
@@ -145,6 +147,7 @@ const Employees = ({match}) => {
               />
             </div>
             )}
+             
                 </Fragment>
             )}
         </Fragment>

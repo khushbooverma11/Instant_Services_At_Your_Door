@@ -16,7 +16,7 @@ const EmployeeCard = ({employee}) => {
     //console.log(service);
     return (
         <Link className="employeeCard" to={`/Employee/${employee._id}`}>
-         
+         <img src={employee.images[0].url} alt={employee.name}/>
          <p>{employee.name}</p>
          <p>{employee.bio}</p>
          <div>

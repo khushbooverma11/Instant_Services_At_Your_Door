@@ -9,7 +9,7 @@ const Profile = ({ history }) => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (isAuthenticated === false) {
+    if (loading===false&&isAuthenticated === false) {
       history.push("/login");
     }
   }, [history, isAuthenticated]);
