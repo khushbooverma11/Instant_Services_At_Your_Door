@@ -1,42 +1,52 @@
-import React from "react";
-import { ReactNavbar } from "overlay-navbar";
-import logo from "../../../images/logo.jfif";
+import React, { Fragment } from "react";
+import { Link ,NavLink} from "react-router-dom";
+import SearchIcon from '@mui/icons-material/Search';
 
-const options = {
-  burgerColorHover: "#eb4034",
-  logo,
-  logoWidth: "20vmax",
-  navColor1: "white",
-  logoHoverSize: "10px",
-  logoHoverColor: "#eb4034",
-  link1Text: "Home",
-  link2Text: "Services",
-  link3Text: "Contact",
-  link4Text: "About",
-  link1Url: "/",
-  link2Url: "/Employees",
-  link3Url: "/contact",
-  link4Url: "/about",
-  link1Size: "1.3vmax",
-  link1Color: "rgba(35, 35, 35,0.8)",
-  nav1justifyContent: "flex-end",
-  nav2justifyContent: "flex-end",
-  nav3justifyContent: "flex-start",
-  nav4justifyContent: "flex-start",
-  link1ColorHover: "#eb4034",
-  link1Margin: "1vmax",
-  profileIconUrl: "/login",
-  profileIconColor: "rgba(35, 35, 35,0.8)",
-  searchIconColor: "rgba(35, 35, 35,0.8)",
-  cartIconColor: "rgba(35, 35, 35,0.8)",
-  profileIconColorHover: "#eb4034",
-  searchIconColorHover: "#eb4034",
-  cartIconColorHover: "#eb4034",
-  cartIconMargin: "1vmax",
-};
+const Header = ({isAuthenticated,user}) => {
+  console.log(isAuthenticated);
+  console.log(user);
+  return <Fragment>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <div className="container-fluid">
+  <NavLink to="/" className="navbar-brand ms-4" href="#">Instant Services</NavLink>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse mx-auto" id="navbarTogglerDemo02">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0  ">
+        <li className="nav-item m-2">
+        <NavLink to="/" className="navlink">
+          <div className="text"> Home</div>
+        </NavLink>
+        </li>
+        <li className="nav-item m-2">
+        <NavLink to="Employees" className="navlink">
+          <div className="text"> Services</div>
+        </NavLink>
+        </li>
+        <li className="nav-item m-2">
+        <NavLink to="contactUs" className="navlink">
+          <div className="text"> Contact Us</div>
+        </NavLink>
+        </li>
+        <li className="nav-item m-2">
+        <NavLink to="contactUs" className="navlink">
+          <div className="text">About Us</div>
+        </NavLink>
+        </li>
+      </ul>
+      
+  
+      <Link to="search"><button type="button"  className=" btn btn-light me-5"><SearchIcon/></button></Link>
+      
 
-const Header = () => {
-  return <ReactNavbar {...options} />;
+      {isAuthenticated === true ? <></>:
+                <> <Link to="/login" ><button className="btn btn-outline-primary">Login</button></Link>
+                  </> }
+    </div>
+  </div>
+</nav>
+  </Fragment>
 };
 
 export default Header;
