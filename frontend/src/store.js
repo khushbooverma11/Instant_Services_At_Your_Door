@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { employeeDetailReducer, employeeReducer } from "./reducers/employeeReducer";
+import { employeeDetailReducer, employeeReducer, newReviewReducer } from "./reducers/employeeReducer";
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { bookReducer } from "./reducers/bookReducer";
-import { newAppointmentReducer } from "./reducers/appointmentReducer";
+import { appointmentDetailsReducer, myAppointmentsReducer, newAppointmentReducer } from "./reducers/appointmentReducer";
 
 
 const reducer = combineReducers({
@@ -15,7 +15,11 @@ const reducer = combineReducers({
     profile:profileReducer,
     forgotPassword:forgotPasswordReducer,
     book:bookReducer,
-    newAppointment:newAppointmentReducer
+    newAppointment:newAppointmentReducer,
+    myAppointments:myAppointmentsReducer,
+    appointmentDetails:appointmentDetailsReducer,
+    newReview:newReviewReducer,
+
   });
 
 

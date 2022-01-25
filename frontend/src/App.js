@@ -29,8 +29,8 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js"
 import AppointmentSuccess from "./component/Book/AppointmentSuccess";
-
-
+import MyAppointments from "./component/Appointment/MyAppointments";
+import AppointmentDetails from "./component/Appointment/AppointmentDetails";
 function App() {
   
   const{isAuthenticated,user}=useSelector(state=>state.user);
@@ -61,7 +61,7 @@ function App() {
   return (
     <Router>
       
-      <Header/>
+      <Header isAuthenticated={isAuthenticated}user={user}/>
       {isAuthenticated&&<UserOptions user={user}/>}
     <Route  exact path="/" component={Home}/>
     <Route  exact path="/Employee/:id" component={EmployeeDetails}/>
@@ -77,7 +77,7 @@ function App() {
     <Route exact path="/book" component={Book} /> 
 
     <ProtectedRoute exact path="/appointing" component={Appointing} />
-    <ProtectedRoute exact path="/appointment/confirm" component={ConfirmAppointment} />
+    
     {stripeApiKey && (
       <Elements stripe={loadStripe(stripeApiKey)}>
       <ProtectedRoute exact path="/process/payment" component={Payment} />
@@ -85,7 +85,12 @@ function App() {
     )}
 
    <ProtectedRoute exact path="/success" component={AppointmentSuccess} />
+   <ProtectedRoute exact path="/appointments" component={MyAppointments} />
+   <Switch>
+   <ProtectedRoute exact path="/appointment/confirm" component={ConfirmAppointment} />
+   <ProtectedRoute exact path="/appointment/:id" component={AppointmentDetails} />
     
+   </Switch>
       <Footer/>
 
       </Router>

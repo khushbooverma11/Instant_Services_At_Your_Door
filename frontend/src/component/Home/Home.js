@@ -7,6 +7,7 @@ import {clearErrors, getEmployee} from"../../actions/employeeAction";
 import { useSelector,useDispatch } from 'react-redux';
 import Loader from "../layout/Loader/Loader"
 import {useAlert} from "react-alert";
+import EmployeeCard from '../Home/EmployeeCard.js';
 
 const Home = () => {
     const alert=useAlert()
@@ -42,7 +43,7 @@ const Home = () => {
 
      <h2 className='homeHeading'>Featured Services</h2>
      <div className='container' id='container'>
-    {employees &&employees.map((employee)=>(<Employee employee={employee}/>))}
+    {employees &&employees.map((employee)=>(<EmployeeCard employee={employee}/>))}
 
      </div>
       </Fragment>)}

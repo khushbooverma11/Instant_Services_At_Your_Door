@@ -21,7 +21,7 @@ const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
 
   const options = [
-    { icon: <ListAltIcon />, name: "Orders", func: orders },
+    { icon: <ListAltIcon />, name: "Appointments", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
     {
       icon: (
@@ -48,7 +48,7 @@ const UserOptions = ({ user }) => {
   }
 
   function orders() {
-    history.push("/appointements");
+    history.push("/appointments");
   }
   function account() {
     history.push("/account");

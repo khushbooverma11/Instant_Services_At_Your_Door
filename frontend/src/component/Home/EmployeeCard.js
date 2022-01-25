@@ -1,18 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import ReactStars from "react-rating-stars-component";
-
+import { Rating } from "@material-ui/lab";
 
 const EmployeeCard = ({employee}) => {
 
-    const options ={
-        edit:false,
-        color:"rgba(20,20,20,0.1)",
-        activeColor:"tomato",
-        size: window.innerWidth < 600 ? 20:25,
-        value:employee.ratings,
-        isHalf: true
-    }
+    const options = {
+        size: "large",
+        value: employee.ratings,
+        readOnly:true,
+        precision:0.5,
+      };
     //console.log(service);
     return (
         <Link className="employeeCard" to={`/Employee/${employee._id}`}>
@@ -20,7 +17,9 @@ const EmployeeCard = ({employee}) => {
          <p>{employee.name}</p>
          <p>{employee.bio}</p>
          <div>
-             <ReactStars {...options} /> <span>{`Reviews:${employee.numOfReviews}`}</span>
+             <Rating {...options} /> <span  className="employeeCardSpan">
+                 {" "}
+                 {`Reviews:${employee.numOfReviews}`}</span>
          </div>
               <span>Charge:{`₹${employee.charge}`}</span>
         </Link>

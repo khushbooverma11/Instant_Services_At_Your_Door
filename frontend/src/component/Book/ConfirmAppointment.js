@@ -10,7 +10,7 @@ const ConfirmOrder = ({ history }) => {
   const { appointingInfo, bookWorkers } = useSelector((state) => state.book);
   const { user } = useSelector((state) => state.user);
 
-  //console.log(appointingInfo);  
+  console.log(appointingInfo);  
  const subtotal = bookWorkers.reduce(
     (acc, worker) => acc + worker.charge,
     0

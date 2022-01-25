@@ -4,7 +4,8 @@ import "./EmployeeDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
-  getEmployeeDetails
+  getEmployeeDetails,
+  newReview
   
 } from "../../actions/employeeAction";
 import ReviewCard from "./ReviewCard.js";
@@ -13,7 +14,15 @@ import { useAlert } from "react-alert";
 import reactStars from "react-rating-stars-component";
 import MetaData from "../layout/MetaData";
 import { addWorkersToBook} from "../../actions/bookAction";
-
+import {
+Dialog,
+DialogActions,
+DialogContent,
+DialogTitle,
+Button,
+}from "@material-ui/core";
+import { Rating } from "@material-ui/lab";
+import { NEW_REVIEW_RESET } from "../../constants/employeeConstants";
 
 
 
@@ -25,17 +34,36 @@ const EmployeeDetails = ({ match }) => {
     (state) => state.employeeDetails
   );
    console.log(employee);
- /* const { success, error: reviewError } = useSelector(
+ const { success, error: reviewError } = useSelector(
     (state) => state.newReview
-  );*/
+  );
 
   const options = {
-    edit:false,
-    color:"rgba(20,20,20,0.1)",
-    activeColor:"tomato",
-    size: window.innerWidth<600?20:25,
+    size: "large",
     value: employee.ratings,
-    isHalf:true,
+    readOnly:true,
+    precision:0.5,
+  };
+
+  const [quantity, setQuantity] = useState(1);
+  const [open, setOpen] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const submitReviewToggle = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
+  const reviewSubmitHandler = () => {
+    const myForm = new FormData();
+
+    myForm.set("rating", rating);
+    myForm.set("comment", comment);
+    myForm.set("employeeId", match.params.id);
+
+    dispatch(newReview(myForm));
+
+    setOpen(false);
   };
   const addToBookHandler = () => {
     dispatch(addWorkersToBook(match.params.id));
@@ -48,9 +76,18 @@ const EmployeeDetails = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
+    if (reviewError) {
+      alert.error(reviewError);
+      dispatch(clearErrors());
+    }
+    if(success){
+      alert.success("Review Submitted Successfully");
+      dispatch({type:NEW_REVIEW_RESET});
+    
+    }
 
       dispatch(getEmployeeDetails(match.params.id));
-  }, [dispatch, match.params.id, error, alert]);
+  }, [dispatch, match.params.id, error, alert,reviewError,success]);
 
   return (
     <Fragment>
@@ -80,8 +117,9 @@ const EmployeeDetails = ({ match }) => {
                 <p>Employee # {employee._id}</p>
               </div>
               <div className="detailsBlock-2">
-                <reactStars {...options} />
-                <span>
+                <Rating {...options} />
+                <span className="detailsBlock-2-span">
+                  {" "}
                   ({employee.numOfReviews} Reviews)
                 </span>
               </div>
@@ -89,7 +127,8 @@ const EmployeeDetails = ({ match }) => {
                 <h1>{`₹${employee.charge}`}</h1>
                 <div className="detailsBlock-3-1">
                   
-                  <button onClick={addToBookHandler}>
+                  <button disabled={employee.stock<1?true:false}
+                  onClick={addToBookHandler}>
                     Book Appointment
                   </button>
                 </div>
@@ -106,13 +145,49 @@ const EmployeeDetails = ({ match }) => {
                 Description : <p>{employee.bio}</p>
               </div>
 
-              <button className="submitReview">
+              <button onClick={submitReviewToggle} className="submitReview">
                 Submit Review
               </button>
             </div>
           </div>
 
           <h3 className="reviewsHeading">REVIEWS</h3>
+
+          <Dialog
+            aria-labelledby="simple-dialog-title"
+            open={open}
+            onClose={submitReviewToggle}
+          >
+            <DialogTitle>Submit Review</DialogTitle>
+            <DialogContent className="submitDialog">
+              <Rating
+                onChange={(e) => setRating(e.target.value)}
+                value={rating}
+                size="large"
+              />
+
+              <textarea
+                className="submitDialogTextArea"
+                cols="30"
+                rows="5"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              ></textarea>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={submitReviewToggle} color="secondary">
+                Cancel
+                </Button>
+                <Button onClick={reviewSubmitHandler} color="primary">
+                  Submit
+                  </Button>
+            
+            </DialogActions>
+          </Dialog>
+
+
+
+
                 {employee.reviews && employee.reviews[0] ? (
             <div className="reviews">
               {employee.reviews &&
