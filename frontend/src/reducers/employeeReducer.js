@@ -2,6 +2,21 @@ import {
     ALL_EMPLOYEE_FAIL,
     ALL_EMPLOYEE_REQUEST,
     ALL_EMPLOYEE_SUCCESS,
+     ADMIN_EMPLOYEE_REQUEST,
+    ADMIN_EMPLOYEE_SUCCESS,
+    ADMIN_EMPLOYEE_FAIL,
+    NEW_EMPLOYEE_REQUEST,
+  NEW_EMPLOYEE_SUCCESS,
+  NEW_EMPLOYEE_FAIL,
+  NEW_EMPLOYEE_RESET,
+  DELETE_EMPLOYEE_REQUEST,
+  DELETE_EMPLOYEE_SUCCESS,
+  DELETE_EMPLOYEE_FAIL,
+  DELETE_EMPLOYEE_RESET,
+  UPDATE_EMPLOYEE_REQUEST,
+  UPDATE_EMPLOYEE_SUCCESS,
+  UPDATE_EMPLOYEE_FAIL,
+  UPDATE_EMPLOYEE_RESET,
     EMPLOYEE_DETAILS_REQUEST,
     EMPLOYEE_DETAILS_FAIL,
     EMPLOYEE_DETAILS_SUCCESS,
@@ -13,11 +28,92 @@ import {
 } from "../constants/employeeConstants";
 
 
-export const employeeReducer=(state={employees:[]},action)=>{
+export const newEmployeeReducer = (state = { employee: {} }, action) => {
+  switch (action.type) {
+    case NEW_EMPLOYEE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case NEW_EMPLOYEE_SUCCESS:
+      return {
+        loading: false,
+        success: action.payload.success,
+        employee: action.payload.employee,
+      };
+    case NEW_EMPLOYEE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case NEW_EMPLOYEE_RESET:
+      return {
+        ...state,
+        success: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+export const employeeReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_EMPLOYEE_REQUEST:
+    case UPDATE_EMPLOYEE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case DELETE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isDeleted: action.payload,
+      };
+
+    case UPDATE_EMPLOYEE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isUpdated: action.payload,
+      };
+    case DELETE_EMPLOYEE_FAIL:
+    case UPDATE_EMPLOYEE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case DELETE_EMPLOYEE_RESET:
+      return {
+        ...state,
+        isDeleted: false,
+      };
+    case UPDATE_EMPLOYEE_RESET:
+      return {
+        ...state,
+        isUpdated: false,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+      };
+    default:
+      return state;
+  }
+};
+
+export const employeesReducer=(state={employees:[]},action)=>{
 
     switch (action.type) {
         case ALL_EMPLOYEE_REQUEST:
-       // case ADMIN_PRODUCT_REQUEST:
+       case ADMIN_EMPLOYEE_REQUEST:
           return {
             loading: true,
             employee: [],
@@ -31,13 +127,13 @@ export const employeeReducer=(state={employees:[]},action)=>{
            filteredEmployeesCount: action.payload.filteredEmployeesCount,
           };
     
-       /* case ADMIN_PRODUCT_SUCCESS:
+        case ADMIN_EMPLOYEE_SUCCESS:
           return {
             loading: false,
-            products: action.payload,
-          };*/
+            employees: action.payload,
+          };
         case ALL_EMPLOYEE_FAIL:
-        //case ADMIN_PRODUCT_FAIL:
+        case ADMIN_EMPLOYEE_FAIL:
           return {
             loading: false,
             error: action.payload,

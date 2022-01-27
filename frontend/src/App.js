@@ -31,6 +31,10 @@ import { loadStripe } from "@stripe/stripe-js"
 import AppointmentSuccess from "./component/Book/AppointmentSuccess";
 import MyAppointments from "./component/Appointment/MyAppointments";
 import AppointmentDetails from "./component/Appointment/AppointmentDetails";
+import Dashboard from "./component/Admin/Dashboard";
+import EmployeeList from "./component/Admin/EmployeeList";
+import NewEmployee from "./component/Admin/NewEmployee";
+import UpdateEmployee from"./component/Admin/UpdateEmployee";
 function App() {
   
   const{isAuthenticated,user}=useSelector(state=>state.user);
@@ -91,6 +95,30 @@ function App() {
    <ProtectedRoute exact path="/appointment/:id" component={AppointmentDetails} />
     
    </Switch>
+   <ProtectedRoute
+          isAdmin={true}
+          exact
+          path="/admin/dashboard"
+          component={Dashboard}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin/employees"
+          isAdmin={true}
+          component={EmployeeList}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin/employee"
+          isAdmin={true}
+          component={NewEmployee}
+        />
+        <ProtectedRoute
+          exact
+          path="/admin/employee/:id"
+          isAdmin={true}
+          component={UpdateEmployee}
+        />
       <Footer/>
 
       </Router>

@@ -8,7 +8,7 @@ const Header = ({isAuthenticated,user}) => {
   return <Fragment>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
-  <NavLink to="/" className="navbar-brand ms-4" href="#">Instant Services</NavLink>
+  <NavLink to="/" className="navbar-brand ms-4" >Instant Services</NavLink>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -20,24 +20,24 @@ const Header = ({isAuthenticated,user}) => {
         </NavLink>
         </li>
         <li className="nav-item m-2">
-        <NavLink to="Employees" className="navlink">
+        <NavLink to="/Employees" className="navlink">
           <div className="text"> Services</div>
         </NavLink>
         </li>
         <li className="nav-item m-2">
-        <NavLink to="contactUs" className="navlink">
+        <NavLink to="/contactUs" className="navlink">
           <div className="text"> Contact Us</div>
         </NavLink>
         </li>
         <li className="nav-item m-2">
-        <NavLink to="contactUs" className="navlink">
+        <NavLink to="/contactUs" className="navlink">
           <div className="text">About Us</div>
         </NavLink>
         </li>
       </ul>
       
   
-      <Link to="search"><button type="button"  className=" btn btn-light me-5"><SearchIcon/></button></Link>
+      <Link to="/search"><button type="button"  className=" btn btn-light me-5"><SearchIcon/></button></Link>
       
 
       {isAuthenticated === true ? <></>:

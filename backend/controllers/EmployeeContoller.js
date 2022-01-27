@@ -2,11 +2,33 @@ const Employee = require("../models/EmployeeModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors=require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
-
+const cloudinary = require("cloudinary");
 
 //create Employee -- Admin
 exports.createEmployee = catchAsyncErrors(async (req,res,next)=>{
-   
+  let images = [];
+
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
+
+  const imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "employees",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
 
     const  employee = await Employee.create(req.body);
     res.status(201).json({
@@ -39,6 +61,15 @@ exports.getAllEmployee = catchAsyncErrors(async (req,res,next)=>{
       resultPerPage,
       filteredEmployeesCount});
 });
+// Get All Product (Admin)
+exports.getAdminEmployees = catchAsyncErrors(async (req, res, next) => {
+  const employees = await Employee.find();
+
+  res.status(200).json({
+    success: true,
+    employees,
+  });
+});
 
 //getEmployee detail
 exports.getEmployeeDetail = catchAsyncErrors(async(req,res,next)=>{
@@ -62,7 +93,36 @@ exports.updateEmployee =catchAsyncErrors( async (req,res,next)=>{
     if(!employee){
         return next(new ErrorHandler("Employee Not Found",404));
     }
+// Images Start Here
+let images = [];
 
+if (typeof req.body.images === "string") {
+  images.push(req.body.images);
+} else {
+  images = req.body.images;
+}
+
+if (images !== undefined) {
+  // Deleting Images From Cloudinary
+  for (let i = 0; i < employee.images.length; i++) {
+    await cloudinary.v2.uploader.destroy(employee.images[i].public_id);
+  }
+
+  const imagesLinks = [];
+
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "employees",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+}
     employee = await Employee.findByIdAndUpdate(req.params.id,req.body,{
     new:true,
     runValidator:true,
@@ -83,6 +143,10 @@ exports.deleteEmployee = catchAsyncErrors(async(req,res,next)=>{
     if(!employee){
         return next(new ErrorHandler('Employee Not Found')); 
     }
+// Deleting Images From Cloudinary
+for (let i = 0; i < employee.images.length; i++) {
+  await cloudinary.v2.uploader.destroy(employee.images[i].public_id);
+}
 
     await employee.remove();
 

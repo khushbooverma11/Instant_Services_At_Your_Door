@@ -1,0 +1,55 @@
+.employeeListContainer {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    border-left: 1px solid rgba(0, 0, 0, 0.158);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  #employeeListHeading {
+    font: 400 2rem "Roboto";
+    padding: 0.5vmax;
+    box-sizing: border-box;
+    color: rgba(0, 0, 0, 0.637);
+    transition: all 0.5s;
+    margin: 2rem;
+    text-align: center;
+  }
+  
+  .employeeListTable {
+    background-color: white;
+    border: none !important;
+  }
+  
+  .employeeListTable div {
+    font: 300 1vmax "Roboto";
+    color: rgba(0, 0, 0, 0.678);
+    border: none !important;
+  }
+  
+  .employeeListTable a,
+  .employeeListTable button {
+    color: rgba(0, 0, 0, 0.527);
+    transition: all 0.5s;
+  }
+  
+  .employeeListTable a:hover {
+    color: tomato;
+  }
+  
+  .employeeListTable button:hover {
+    color: rgb(236, 30, 30);
+  }
+  
+  .MuiDataGrid-columnHeader div {
+    color: rgb(255, 255, 255);
+  }
+  
+  @media screen and (max-width: 600px) {
+    .employeeListTable div {
+      font: 300 4vw "Roboto";
+    }
+  }
+  

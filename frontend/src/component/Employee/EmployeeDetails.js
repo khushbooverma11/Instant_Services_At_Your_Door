@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Carousel from "react-material-ui-carousel";
+
 import "./EmployeeDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,7 +11,6 @@ import {
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
-import reactStars from "react-rating-stars-component";
 import MetaData from "../layout/MetaData";
 import { addWorkersToBook} from "../../actions/bookAction";
 import {
@@ -127,7 +126,7 @@ const EmployeeDetails = ({ match }) => {
                 <h1>{`₹${employee.charge}`}</h1>
                 <div className="detailsBlock-3-1">
                   
-                  <button disabled={employee.stock<1?true:false}
+                  <button disabled={employee.availability?false:true}
                   onClick={addToBookHandler}>
                     Book Appointment
                   </button>
@@ -135,8 +134,8 @@ const EmployeeDetails = ({ match }) => {
 
                 <p>
                   Status:
-                  <b className={employee.availability == false ? "redColor" : "greenColor"}>
-                    {employee.availability == false ? "NotAvailable" : "Available"}
+                  <b className={employee.availability ?"greenColor":"redColor"}>
+                    {employee.availability?"Available":"NotAvailable"}
                   </b>
                 </p>
               </div>

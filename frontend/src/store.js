@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { employeeDetailReducer, employeeReducer, newReviewReducer } from "./reducers/employeeReducer";
+import { employeeDetailReducer, employeesReducer,employeeReducer, newEmployeeReducer, newReviewReducer } from "./reducers/employeeReducer";
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { bookReducer } from "./reducers/bookReducer";
 import { appointmentDetailsReducer, myAppointmentsReducer, newAppointmentReducer } from "./reducers/appointmentReducer";
@@ -9,7 +9,7 @@ import { appointmentDetailsReducer, myAppointmentsReducer, newAppointmentReducer
 
 const reducer = combineReducers({
     
-    employees: employeeReducer,
+    employees: employeesReducer,
     employeeDetails: employeeDetailReducer,
     user:userReducer,
     profile:profileReducer,
@@ -19,7 +19,8 @@ const reducer = combineReducers({
     myAppointments:myAppointmentsReducer,
     appointmentDetails:appointmentDetailsReducer,
     newReview:newReviewReducer,
-
+    newEmployee:newEmployeeReducer,
+    employee:employeeReducer,
   });
 
 
