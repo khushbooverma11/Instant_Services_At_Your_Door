@@ -5,6 +5,17 @@ import {
     MY_APPOINTMENTS_REQUEST,
     MY_APPOINTMENTS_SUCCESS,
     MY_APPOINTMENTS_FAIL,
+    ALL_APPOINTMENTS_REQUEST,
+    ALL_APPOINTMENTS_SUCCESS,
+    ALL_APPOINTMENTS_FAIL,
+    UPDATE_APPOINTMENT_REQUEST,
+    UPDATE_APPOINTMENT_SUCCESS,
+    UPDATE_APPOINTMENT_FAIL,
+    UPDATE_APPOINTMENT_RESET,
+    DELETE_APPOINTMENT_REQUEST,
+    DELETE_APPOINTMENT_SUCCESS,
+    DELETE_APPOINTMENT_FAIL,
+    DELETE_APPOINTMENT_RESET,
     APPOINTMENT_DETAILS_REQUEST,
     APPOINTMENT_DETAILS_SUCCESS,
     APPOINTMENT_DETAILS_FAIL,
@@ -71,7 +82,86 @@ export const newAppointmentReducer = (state = {}, action) => {
     }
   };
 
+  export const allAppointmentsReducer = (state = {appointments:[]}, action) => {
+    switch (action.type) {
+      case ALL_APPOINTMENTS_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+  
+      case ALL_APPOINTMENTS_SUCCESS:
+        return {
+          loading: false,
+          appointments: action.payload,
+        };
+  
+      case ALL_APPOINTMENTS_FAIL:
+        return {
+          loading: false,
+          error: action.payload,
+        };
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
 
+
+  export const appointmentReducer = (state = {appointments:[]}, action) => {
+    switch (action.type) {
+      case UPDATE_APPOINTMENT_REQUEST:
+        case DELETE_APPOINTMENT_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+  
+      case UPDATE_APPOINTMENT_SUCCESS:
+        return {
+           ...state,
+          loading: false,
+          isUpdated: action.payload,
+        };
+
+      case DELETE_APPOINTMENT_SUCCESS:
+          return {
+             ...state,
+            loading: false,
+            isDeleted: action.payload,
+       };
+  
+      case UPDATE_APPOINTMENT_FAIL:
+        case DELETE_APPOINTMENT_FAIL:
+        return {
+            ...state,
+          loading: false,
+          error: action.payload,
+        };
+
+        case UPDATE_APPOINTMENT_RESET:
+          case DELETE_APPOINTMENT_RESET:
+          return {
+            ...state,
+            loading: false,
+            isDeleted: false,
+          };
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+  
+      default:
+        return state;
+    }
+  };
+  
 
   export const appointmentDetailsReducer = (state = {appointment:{}}, action) => {
     switch (action.type) {

@@ -5,6 +5,17 @@ import {
     MY_APPOINTMENTS_REQUEST,
     MY_APPOINTMENTS_SUCCESS,
     MY_APPOINTMENTS_FAIL,
+    ALL_APPOINTMENTS_REQUEST,
+    ALL_APPOINTMENTS_SUCCESS,
+    ALL_APPOINTMENTS_FAIL,
+    UPDATE_APPOINTMENT_REQUEST,
+    UPDATE_APPOINTMENT_SUCCESS,
+    UPDATE_APPOINTMENT_FAIL,
+    UPDATE_APPOINTMENT_RESET,
+    DELETE_APPOINTMENT_REQUEST,
+    DELETE_APPOINTMENT_SUCCESS,
+    DELETE_APPOINTMENT_FAIL,
+    DELETE_APPOINTMENT_RESET,
     APPOINTMENT_DETAILS_REQUEST,
     APPOINTMENT_DETAILS_SUCCESS,
     APPOINTMENT_DETAILS_FAIL,
@@ -55,7 +66,68 @@ export const createAppointment = (appointment) => async (dispatch) => {
     }
   };
 
+  //Get all appontements(admin)
+  export const getAllAppointments = () => async (dispatch) => {
+    try {
+      dispatch({ type: ALL_APPOINTMENTS_REQUEST });
+  
+      /*const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };*/
+      const { data } = await axios.get("/api/v1/admin/appointments");
+  
+      dispatch({ type: ALL_APPOINTMENTS_SUCCESS, payload: data.appointments });
+    } catch (error) {
+      dispatch({
+        type: ALL_APPOINTMENTS_FAIL,
+        payload: error.response.data.message,
+      });
+    }
+  };
 
+  // Update Appointment
+export const UpdateAppointment = (id,appointment) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_APPOINTMENT_REQUEST, });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.put(`/api/v1/admin/appointment/${id}`, appointment, config);
+
+    dispatch({ type: UPDATE_APPOINTMENT_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_APPOINTMENT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+  // Delete Appointment
+export const deleteAppointment = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_APPOINTMENT_REQUEST, });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.delete(`/api/v1/admin/appointment/${id}`);
+
+    dispatch({ type: DELETE_APPOINTMENT_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: DELETE_APPOINTMENT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 // Get appontements Details
 export const getAppointmentDetails = (id) => async (dispatch) => {
   try {

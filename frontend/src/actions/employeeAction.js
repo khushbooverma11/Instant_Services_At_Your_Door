@@ -22,6 +22,13 @@ import {
     NEW_REVIEW_REQUEST ,
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
+    ALL_REVIEW_REQUEST,
+    ALL_REVIEW_SUCCESS,
+    ALL_REVIEW_FAIL,
+    DELETE_REVIEW_REQUEST,
+    DELETE_REVIEW_SUCCESS,
+    DELETE_REVIEW_RESET,
+    DELETE_REVIEW_FAIL,
     CLEAR_ERRORS,
 } from "../constants/employeeConstants";
 // Get All Employees
@@ -176,6 +183,43 @@ export const createEmployee = (employeeData) => async (dispatch) => {
   };
 
 
+//Get ALL Reviews --Admin
+export const getAllReviews =(id)=> async (dispatch) => {
+  try {
+    dispatch({ type:  ALL_REVIEW_REQUEST });
+    
+    const {data}=await axios.get(`/api/v1/reviews?id=${id}`);
+   
+    dispatch({
+      type:ALL_REVIEW_SUCCESS ,
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+export const deleteReviews =(reviewId,employeeId)=> async (dispatch) => {
+  try {
+    dispatch({ type:  ALL_REVIEW_REQUEST });
+   
+    const {data}=await axios.delete(`/api/v1/reviews?id=${reviewId}&employeeId=${employeeId}`);
+   
+    dispatch({
+      type:DELETE_REVIEW_SUCCESS ,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // Clearing Errors
 export const clearErrors = () => async (dispatch) => {

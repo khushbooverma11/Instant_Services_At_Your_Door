@@ -18,7 +18,7 @@ router.route("/appointment/:id").get(isAuthenticatedUser, getSingleAppointment);
 router.route("/appointments/me").get(isAuthenticatedUser, myAppointments);
 
 router
-  .route("/admin/appointment")
+  .route("/admin/appointments")
   .get(isAuthenticatedUser, authorizeRoles("admin"), getAllAppointments);
 
 router

@@ -81,8 +81,8 @@ exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("appointment not found with this Id", 404));
   }
 
-  if (appointment.appointmentStatus === "Completed") {
-    return next(new ErrorHandler("You have already delivered this appointment", 400));
+  if (appointment.appointStatus === "Completed") {
+    return next(new ErrorHandler("You have already Completed this appointment", 400));
   }
 
 
@@ -95,9 +95,9 @@ exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
   }*/
   appointment.appointStatus = req.body.status;
 
-  if (req.body.status === "completed") {
+  if (req.body.status === "Completed") {
     appointment.completed =true;
-    await Employee.findOneAndUpdate({_id:appointment.appointedEmployee.employee},{availability:true});
+    await Employee.findOneAndUpdate({_id:appointment.appointedEmployees.employee},{availability:true});
   }
 
   await appointment.save({ validateBeforeSave: false });

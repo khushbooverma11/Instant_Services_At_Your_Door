@@ -1,10 +1,10 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { employeeDetailReducer, employeesReducer,employeeReducer, newEmployeeReducer, newReviewReducer } from "./reducers/employeeReducer";
-import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
+import { employeeDetailReducer, employeesReducer,employeeReducer, newEmployeeReducer, newReviewReducer, employeeReviewsReducer, reviewsReducer } from "./reducers/employeeReducer";
+import { allUsersReducer, forgotPasswordReducer, profileReducer, userDetailReducer, userDetailsReducer, userReducer } from "./reducers/userReducer";
 import { bookReducer } from "./reducers/bookReducer";
-import { appointmentDetailsReducer, myAppointmentsReducer, newAppointmentReducer } from "./reducers/appointmentReducer";
+import { allAppointmentsReducer, appointmentDetailsReducer, appointmentReducer, myAppointmentsReducer, newAppointmentReducer } from "./reducers/appointmentReducer";
 
 
 const reducer = combineReducers({
@@ -21,6 +21,12 @@ const reducer = combineReducers({
     newReview:newReviewReducer,
     newEmployee:newEmployeeReducer,
     employee:employeeReducer,
+    allAppointments:allAppointmentsReducer,
+    appointment:appointmentReducer,
+    allUsers:allUsersReducer,
+    userDetails: userDetailsReducer,
+    employeeReviews: employeeReviewsReducer,
+    review: reviewsReducer,
   });
 
 

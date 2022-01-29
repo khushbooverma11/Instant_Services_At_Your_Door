@@ -17,6 +17,8 @@ const Dashboard = ({history}) => {
   const dispatch = useDispatch();
 
   const { error, employees } = useSelector((state) => state.employees);
+  const { appointments } = useSelector((state) => state.allAppointments);
+  const { users } = useSelector((state) => state.allUsers);
   console.log(employees);
   
  //console.log(Object.keys(employees).length);
@@ -31,6 +33,8 @@ console.log(typeof employees);
     
   useEffect(() => {
     dispatch(getAdminEmployee());
+    dispatch(getAllAppointments());
+    dispatch(getAllUsers());
   }, [dispatch]);
   
 
@@ -52,7 +56,7 @@ console.log(typeof employees);
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [4,5],
+        data: [notAvailable,employees && employees.length],
       },
     ],
   };
@@ -76,15 +80,15 @@ console.log(typeof employees);
           <div className="dashboardSummaryBox2">
             <Link to="/admin/employees">
               <p>Employee</p>
-             <p>50</p>
+             <p>{employees && employees.length}</p>
             </Link>
             <Link to="/admin/appointments">
               <p>Appointments</p>
-              <p>4</p>
+              <p>{appointments && appointments.length}</p>
             </Link>
             <Link to="/admin/users">
               <p>Users</p>
-              <p>7</p>
+              <p>{users && users.length}</p>
             </Link>
           </div>
         </div>

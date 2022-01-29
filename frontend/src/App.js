@@ -35,6 +35,11 @@ import Dashboard from "./component/Admin/Dashboard";
 import EmployeeList from "./component/Admin/EmployeeList";
 import NewEmployee from "./component/Admin/NewEmployee";
 import UpdateEmployee from"./component/Admin/UpdateEmployee";
+import AppointmentList from './component/Admin/AppointmentList';
+import ProcessAppointment from './component/Admin/ProcessAppointment';
+import UsersList from './component/Admin/UsersList';
+import UpdateUser from './component/Admin/UpdateUser';
+import EmployeeReviews from './component/Admin/EmployeeReviews';
 function App() {
   
   const{isAuthenticated,user}=useSelector(state=>state.user);
@@ -118,6 +123,41 @@ function App() {
           path="/admin/employee/:id"
           isAdmin={true}
           component={UpdateEmployee}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/admin/appointments"
+          isAdmin={true}
+          component={AppointmentList}
+        />
+
+       <ProtectedRoute
+          exact
+          path="/admin/appointment/:id"
+          isAdmin={true}
+          component={ProcessAppointment}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/admin/users"
+          isAdmin={true}
+          component={UsersList}
+        />
+
+      <ProtectedRoute
+          exact
+          path="/admin/user/:id"
+          isAdmin={true}
+          component={UpdateUser}
+        />
+
+      <ProtectedRoute
+          exact
+          path="/admin/reviews"
+          isAdmin={true}
+          component={EmployeeReviews}
         />
       <Footer/>
 
