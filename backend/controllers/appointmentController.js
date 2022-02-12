@@ -22,7 +22,11 @@ exports.newAppointment=catchAsyncErrors(async(req,res,next)=>{
         paidAt: Date.now(),
         user: req.user._id,
       });
-    
+     
+     appointedEmployees.forEach( async(worker) => {
+        await Employee.findOneAndUpdate({_id:worker.employee},{availability:false});
+      });
+
       res.status(201).json({
         success: true,
         appointment,
@@ -76,7 +80,7 @@ exports.getAllAppointments = catchAsyncErrors(async (req, res, next) => {
 // update Appointment Status -- Admin
 exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
   const appointment = await Appointment.findById(req.params.id);
-
+  console.log(appointment);
   if (!appointment) {
     return next(new ErrorHandler("appointment not found with this Id", 404));
   }
@@ -97,7 +101,12 @@ exports.updateAppointment = catchAsyncErrors(async (req, res, next) => {
 
   if (req.body.status === "Completed") {
     appointment.completed =true;
-    await Employee.findOneAndUpdate({_id:appointment.appointedEmployees.employee},{availability:true});
+
+    appointment.appointedEmployees.forEach( async(worker) => {
+      await Employee.findOneAndUpdate({_id:worker.employee},{availability:true});
+    });
+    //await Employee.findOneAndUpdate({_id:appointment.appointedEmployees.employee},{availability:true});
+    console.log(appointment.appointedEmployees);
   }
 
   await appointment.save({ validateBeforeSave: false });
@@ -120,6 +129,12 @@ exports.deleteAppointment = catchAsyncErrors(async (req, res, next) => {
 
   if (!appointment) {
     return next(new ErrorHandler("appointment not found with this Id", 404));
+  }
+  if(appointment.appointStatus!=="Completed")
+  {
+    appointment.appointedEmployees.forEach( async(worker) => {
+      await Employee.findOneAndUpdate({_id:worker.employee},{availability:true});
+    });
   }
 
   await appointment.remove();

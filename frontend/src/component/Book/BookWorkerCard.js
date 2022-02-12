@@ -7,7 +7,7 @@ const BookWorkerCard = ({ worker, deleteBookWorkers }) => {
     <div className="BookWorkerCard">
       <img src={worker.image} alt="ssa" />
       <div>
-        <Link to={`/Employee/${worker.employee}`}>{worker.name}</Link>
+        <Link to={`/Employee/${worker.employee}`}>{worker.bio}</Link>
         <span>{`Charge: ₹${worker.charge}`}</span>
         <p onClick={() => deleteBookWorkers(worker.employee)}>Remove</p>
       </div>

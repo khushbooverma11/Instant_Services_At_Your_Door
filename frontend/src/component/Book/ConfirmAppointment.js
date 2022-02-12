@@ -63,14 +63,14 @@ const ConfirmOrder = ({ history }) => {
             </div>
           </div>
           <div className="confirmBookWorkers">
-            <Typography>Your Cart Items:</Typography>
+            <Typography>Your Cart Service:</Typography>
             <div className="confirmBookWorkersContainer">
               {bookWorkers &&
                 bookWorkers.map((worker) => (
                   <div key={worker.employee}>
                     <img src={worker.image} alt="employee" />
                     <Link to={`/employee/${worker.employee}`}>
-                      {worker.name}
+                      {worker.bio}
                     </Link>{" "}
                     <span>
                      

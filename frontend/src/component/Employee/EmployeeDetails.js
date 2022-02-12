@@ -48,7 +48,6 @@ const EmployeeDetails = ({ match }) => {
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
   const submitReviewToggle = () => {
     open ? setOpen(false) : setOpen(true);
   };
@@ -66,7 +65,7 @@ const EmployeeDetails = ({ match }) => {
   };
   const addToBookHandler = () => {
     dispatch(addWorkersToBook(match.params.id));
-    alert.success("Appointment Booked");
+    alert.success("Added to Wishlist");
   };
 
 
@@ -94,7 +93,7 @@ const EmployeeDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={employee.name}/>
+          <MetaData title={employee.bio}/>
           <div className="EmployeeDetails">
             <div>
     
@@ -112,7 +111,7 @@ const EmployeeDetails = ({ match }) => {
 
             <div>
               <div className="detailsBlock-1">
-                <h2>{employee.name}</h2>
+                <h2>{employee.bio}</h2>
                 <p>Employee # {employee._id}</p>
               </div>
               <div className="detailsBlock-2">
@@ -141,7 +140,12 @@ const EmployeeDetails = ({ match }) => {
               </div>
 
               <div className="detailsBlock-4">
-                Description : <p>{employee.bio}</p>
+                Provided by : <p>{employee.name}</p>
+                Address: <p>{employee.addressline1},{employee.city}</p>
+                <div>Verified Service, No need to visited , just book them . They will arrive at your home to provide service.<button disabled={employee.availability?false:true}
+                  onClick={addToBookHandler}>
+                    Book Now!
+                  </button></div>
               </div>
 
               <button onClick={submitReviewToggle} className="submitReview">

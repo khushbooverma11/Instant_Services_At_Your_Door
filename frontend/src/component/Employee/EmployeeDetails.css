@@ -117,7 +117,27 @@
     color: rgba(0, 0, 0, 0.897);
     font: 500 1.2vmax sans-serif;
   }
-  
+  .detailsBlock-4 > div{
+    background-color: rgb(209, 207, 204);
+    font-size: small;
+    padding: 1vmax 1vmax;
+  }
+  .detailsBlock-4> div>button{
+    border-radius: 5px;
+    padding: 0.5vmax 0.5vmax;
+    background-color: rgb(0, 140, 255);
+    margin: 1vmax;
+    font-size: 0.9vmax;
+    color: rgb(209, 222, 135);
+    border: none;
+    outline: none; 
+  }
+  .detailsBlock-4> div>button:hover{
+    font-size: 1.2vmax;
+    margin:0.9vmax;
+    border: none;
+    outline: none; 
+  }
   .detailsBlock-4 > p {
     color: rgba(0, 0, 0, 0.534);
     font: 300 0.8vmax sans-serif;

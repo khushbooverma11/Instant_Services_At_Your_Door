@@ -22,6 +22,7 @@ const AppointmentDetails = ({ match }) => {
 
     dispatch(getAppointmentDetails(match.params.id));
   }, [dispatch, alert, error, match.params.id]);
+
   return (
     <Fragment>
       {loading ? (
@@ -82,12 +83,12 @@ const AppointmentDetails = ({ match }) => {
                 <div>
                   <p
                     className={
-                      appointment.appointmentStatus && appointment.appointmentStatus === "Completed"
+                      appointment.appointStatus && appointment.appointtStatus === "Completed"
                         ? "greenColor"
                         : "redColor"
                     }
                   >
-                    {appointment.appointmentStatus && appointment.appointmentStatus}
+                    {appointment.appointStatus && appointment.appointStatus}
                   </p>
                 </div>
               </div>
@@ -101,7 +102,7 @@ const AppointmentDetails = ({ match }) => {
                     <div key={worker.employee}>
                     <img src={worker.image} alt="employee" />
                     <Link to={`/employee/${worker.employee}`}>
-                      {worker.name}
+                      {worker.bio}
                     </Link>{" "}
                       <span>
                         Charge:

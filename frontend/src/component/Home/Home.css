@@ -30,6 +30,19 @@
   font: 500 1vmax "Roboto";
 }
 
+.banner> div> input,
+.banner> div> select,
+.banner> div> select {
+  padding: 1vmax ;
+  margin-bottom: 1vmax;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax "Roboto";
+    outline: none;
+}
+
 .banner::after {
     content: "";
     width: 100vw;
@@ -41,6 +54,7 @@
     clip-path: polygon(100% 68%, 0 100%, 100% 100%);
     max-width: 100%;
   }
+
 
   .homeHeading {
     text-align: center;
@@ -90,6 +104,9 @@
     margin: 1vmax 0.5vmax;
     margin-bottom: 0;
   }
+  .employeeCard > .text{
+    font-size: 0.7vmax;
+  }
   .employeeCard >span{
     margin: 0.5vmax;
     color: tomato;
@@ -100,7 +117,6 @@
     box-shadow: 3px 3px 5px rgba(15, 15, 15, 0.26);
     transform: translateY(-1vmax);  
   }
-
 
   @media screen and (max-width: 600px) {
     .employeeCard > p {
@@ -120,4 +136,11 @@
       margin: 0 0.5vmax;
       font: 300 1vmax "Roboto";
     }
+
+    .banner> div> input,
+    .banner> div> select,
+    .banner> div> select {
+      padding: 2.5vmax 5vmax;
+      font: 300 1.7vmax "Roboto";
+     }
   }

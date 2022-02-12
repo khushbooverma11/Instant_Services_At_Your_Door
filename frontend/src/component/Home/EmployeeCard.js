@@ -10,12 +10,12 @@ const EmployeeCard = ({employee}) => {
         readOnly:true,
         precision:0.5,
       };
-    //console.log(service);
+    console.log(employee);
     return (
         <Link className="employeeCard" to={`/Employee/${employee._id}`}>
-         <img src={employee.images[0].url} alt={employee.name}/>
-         <p>{employee.name}</p>
+         <img src={employee.images.length &&employee.images[0].url} alt={employee.bio}/>
          <p>{employee.bio}</p>
+         <p className="text">{employee.name}</p>
          <div>
              <Rating {...options} /> <span  className="employeeCardSpan">
                  {" "}

@@ -19,7 +19,7 @@ const Book = ({history}) => {
   const checkoutHandler = () => {
     history.push("/login?redirect=appointing");
   };
-
+ console.log(bookWorkers);
   return (
     <Fragment>{bookWorkers.length === 0 ? (
         <div className="emptyBook">
@@ -43,8 +43,8 @@ const Book = ({history}) => {
                 <div className="bookContainer" key={worker.employee}>
                   <BookWorkerCard worker={worker} deleteBookWorkers={deleteBookWorkers}/>
                   <div className="bookInput">
-                    
-                    <input type="text" value={worker.avalability} readOnly />
+                    <h1>{worker.availability}</h1>
+                    <input type="text" value={worker.charge} readOnly />
                     
                   </div>
                   <p className="bookSubtotal">{`₹${

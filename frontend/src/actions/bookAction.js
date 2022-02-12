@@ -17,6 +17,7 @@ export const addWorkersToBook = (id,availability) => async (dispatch, getState) 
         charge: data.employee.charge,
         image: data.employee.images[0].url,
         availability: data.employee.availability,
+        bio:data.employee.bio,
         //quantity,
       },
     });

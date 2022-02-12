@@ -16,16 +16,16 @@ import Slider from "@material-ui/core/Slider";
 import Typography from "@material-ui/core/Typography";
 import {useAlert} from "react-alert";
 import MetaData from '../layout/MetaData';
-
+import LocationCityIcon from '@material-ui/icons/LocationCity';
 
 const categories = [
-  "Worker",
-  "Electronics Repairing",
-  "Beauty&",
-  "Artists",
-  "HealthCare",
+  "Home Repairs",
+  "Salon for Women",
+  "Home Painting",
+  "Appliance Repair",
+  "Mental Therapies",
   "Vehical Mechanic",
-  "Tutors",
+  "House Cleaning",
 ];
 const Employees = ({match}) => {
 
@@ -36,9 +36,14 @@ const Employees = ({match}) => {
     const [charge, setCharge] = useState([0, 25000]);
     
    const [category, setCategory] = useState("");
-
+   const [City,setCity] = useState("");
    const [ratings, setRatings] = useState(0);
-
+   const cities = [
+    "Delhi",
+    "Mumbai",
+    "Kolkata",
+    "Bangalore",
+  ];
     const {
       employees,
       loading,
@@ -47,11 +52,9 @@ const Employees = ({match}) => {
       resultPerPage,
       filteredEmployeesCount
     } = useSelector((state) => state.employees);
-
+    
+    const {  user, isAuthenticated } = useSelector((state) => state.user);
     const keyword =match.params.keyword;
-    console.log(employeesCount);
-    console.log(filteredEmployeesCount);
-    console.log(resultPerPage);
 
     const setCurrentPageNo = (e) => {
         setCurrentPage(e);
@@ -66,10 +69,9 @@ const Employees = ({match}) => {
         alert.error(error);
         dispatch(clearErrors());
       }
-
       
-        dispatch(getEmployee(keyword,currentPage,charge,category,ratings))
-    }, [dispatch,keyword,currentPage,charge,category,alert,error,ratings]);
+        dispatch(getEmployee(keyword,currentPage,charge,category,ratings,City))
+    }, [dispatch,keyword,currentPage,charge,category,alert,error,ratings,City,user]);
 
     let count = filteredEmployeesCount;
     return (
@@ -78,8 +80,19 @@ const Employees = ({match}) => {
           <Loader />
         ) : (
           <Fragment>
-              <MetaData title="EMPLOYEES"/>
-                 <h2 className="employeesHeading">Employees</h2>
+              <MetaData title="SERVICES"/>
+              <div className="setLocation">
+              <LocationCityIcon/>
+              <select value={City} onChange={(e) =>setCity(e.target.value)}  name="city">
+                <option value="">Choose City</option>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+            </div>
+                 <h2 className="employeesHeading">Services</h2>
 
                  <div className="employees">
                      {employees &&

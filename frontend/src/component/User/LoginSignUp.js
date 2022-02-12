@@ -8,6 +8,7 @@ import FaceIcon from '@material-ui/icons/Face'
 import { useDispatch,useSelector } from 'react-redux';
 import { clearErrors,login,register } from '../../actions/userAction'
 import { useAlert } from 'react-alert'
+import LocationOn from '@material-ui/icons/LocationOn';
 
 const LoginSignUp = ({history,location}) => {
 
@@ -35,6 +36,15 @@ const { error, loading, isAuthenticated } = useSelector(
   const { name, email, password } = user;
   const [avatar, setAvatar] = useState("/Profile.png");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+  
+  const cities = [
+    "Delhi",
+    "Mumbai",
+    "Kolkata",
+    "Bangalore",
+  ];
+
+  const [city,setCity] = useState(" ");
 
   const loginSubmit = (e) => {
     e.preventDefault();
@@ -51,6 +61,7 @@ const { error, loading, isAuthenticated } = useSelector(
     myForm.set("email", email);
     myForm.set("password", password);
     myForm.set("avatar", avatar);
+    myForm.set('city',city);
     //console.log("SignUp Form Submitted");
     dispatch(register(myForm));
   };
@@ -181,6 +192,16 @@ const { error, loading, isAuthenticated } = useSelector(
               onChange={registerDataChange}
             />
           </div>
+          <div>
+              <select value={city} onChange={(e) => setCity(e.target.value)}>
+                <option value="">Choose City</option>
+                {cities.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+            </div>
           <div id="registerImage">
                 <img src={avatarPreview} alt="Avatar Preview" />
                 <input

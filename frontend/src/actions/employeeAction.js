@@ -32,17 +32,19 @@ import {
     CLEAR_ERRORS,
 } from "../constants/employeeConstants";
 // Get All Employees
-export const getEmployee=(keyword="",currentPage = 1,charge =[0,25000],category,ratings="0")=> 
+export const getEmployee=(keyword="",currentPage = 1,charge =[0,25000],category,ratings="0",City)=> 
 async (dispatch) => {
     try {
       dispatch({ type: ALL_EMPLOYEE_REQUEST });
       
-
+      
       let link = `/api/v1/Employees?keyword=${keyword}&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&ratings[gte]=${ratings}`;
-  
+      if(City){
+        link = `/api/v1/Employees?keyword=${keyword}&city=${City}&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&ratings[gte]=${ratings}`;
+      }
       if(category)
       {
-        link=`/api/v1/Employees?keyword=${keyword}&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&category=${category}&ratings[gte]=${ratings}`
+        link=`/api/v1/Employees?keyword=${keyword}&city=Delhi&page=${currentPage}&charge[gte]=${charge[0]}&charge[lte]=${charge[1]}&category=${category}&ratings[gte]=${ratings}`
       }
       const {data}=await axios.get(link);
       //console.log(data);

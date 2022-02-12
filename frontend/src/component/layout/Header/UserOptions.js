@@ -7,6 +7,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
@@ -25,11 +26,11 @@ const UserOptions = ({ user }) => {
     { icon: <PersonIcon />, name: "Profile", func: account },
     {
       icon: (
-        <ShoppingCartIcon
+        <CheckCircleIcon
           style={{ color: bookWorkers.length > 0 ? "tomato" : "unset" }}
         />
       ),
-      name: `Book(${bookWorkers.length})`,
+      name: `Wishlist(${bookWorkers.length})`,
       func: book,
     },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },

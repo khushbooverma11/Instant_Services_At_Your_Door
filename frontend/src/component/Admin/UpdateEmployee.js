@@ -36,14 +36,14 @@ const UpdateEmployee = ({history,match}) => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-  "Worker",
-  "Electronics Repairing",
-  "Beauty&",
-  "Artists",
-  "HealthCare",
-  "Vehical Mechanic",
-  "Tutors",
-];
+    "Home Repairs",
+    "Salon for Women",
+    "Home Painting",
+    "Appliance Repair",
+    "Mental Therapies",
+    "Vehical Mechanic",
+    "House Cleaning",
+  ];
 const employeeId = match.params.id;
 
   useEffect(() => {

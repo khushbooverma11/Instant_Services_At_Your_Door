@@ -7,7 +7,20 @@
     font: 500 1.5vmax "Roboto";
     text-align: center;
   }
-  
+  .setLocation{
+    margin-left: 2vmax;
+    width: 20vmax;
+  }
+  .setLocation > select{
+    padding: 1vmax 1vmax;
+    margin-top: 4vmax;
+    width: 40%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.267);
+    border-radius: 4px;
+    font: 300 0.9vmax cursive;
+    outline: none;
+  }
   .employees {
     display: flex;
     flex-wrap: wrap;
@@ -69,7 +82,7 @@
   .filterBox {
     width: 10vmax;
     position: absolute;
-    top: 10vmax;
+    top: 15vmax;
     left: 4vmax;
   }
   

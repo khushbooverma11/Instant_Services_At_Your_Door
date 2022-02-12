@@ -1,13 +1,13 @@
-import React, { Fragment ,useEffect} from 'react'
+import React, { Fragment ,useEffect, useState} from 'react'
 import {CgMouse} from 'react-icons/all'
 import '../Home/Home.css'
-import Employee from '../Home/EmployeeCard.js';
 import MetaData from "../layout/MetaData";
 import {clearErrors, getEmployee} from"../../actions/employeeAction";
 import { useSelector,useDispatch } from 'react-redux';
 import Loader from "../layout/Loader/Loader"
 import {useAlert} from "react-alert";
 import EmployeeCard from '../Home/EmployeeCard.js';
+
 
 const Home = () => {
     const alert=useAlert()
@@ -17,6 +17,8 @@ const Home = () => {
     );
     console.log(employees);
     console.log(employeeCount);
+
+    
    useEffect(() => {
        if(error){
         alert.error(error);
@@ -35,7 +37,7 @@ const Home = () => {
     <div className="banner">
          <p>Welcome to InstantService!!</p>
          <h1>Get Our Services at Your Home <br/>No Need to go Outside</h1>
-
+         
          <a href="#container">
              <button>Scroll<CgMouse/></button>
          </a>

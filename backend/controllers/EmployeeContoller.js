@@ -29,8 +29,11 @@ exports.createEmployee = catchAsyncErrors(async (req,res,next)=>{
 
   req.body.images = imagesLinks;
   req.body.user = req.user.id;
-
+  
+  console.log(req.body);
     const  employee = await Employee.create(req.body);
+
+    console.log(employee);
     res.status(201).json({
         success:true,
         employee,
@@ -44,7 +47,7 @@ exports.getAllEmployee = catchAsyncErrors(async (req,res,next)=>{
   const resultPerPage=8;
     const employeeCount=await Employee.countDocuments();
     
-    const apiFeature=new ApiFeatures(Employee.find(),req.query).search().filter()
+    const apiFeature=new ApiFeatures(Employee.find({availability:true}),req.query).search().filter()
     
     let employees = await apiFeature.query;
 

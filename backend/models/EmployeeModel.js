@@ -8,7 +8,7 @@ const EmployeeSchema =  new mongoose.Schema({
       },
       bio: {
         type: String,
-        required: [true, "Please Enter your about"],
+        required: [true, "Please Enter your about service Name"],
       },
       charge: {
         type: Number,
@@ -35,6 +35,14 @@ const EmployeeSchema =  new mongoose.Schema({
         type: String,
         required: [true, "Please Enter Service Category"],
       },
+    addressline1:{
+        type:String,
+        required:true
+    },
+    city:{
+        type:String,
+        required:true
+    },
       availability: {
         type:Boolean,
         default: true,
