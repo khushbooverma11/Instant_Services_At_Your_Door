@@ -89,7 +89,7 @@ const MyAppointments = () => {
 
   return (
     <Fragment>
-      <MetaData title={`${user.name} - Appointments`} />
+      <MetaData title={`${user.name} - Booked Services`} />
 
       {loading ? (
         <Loader />
@@ -104,7 +104,7 @@ const MyAppointments = () => {
             autoHeight
           />
 
-          <Typography id="myAppointementsHeading">{user.name}'s Appointments</Typography>
+          <Typography id="myAppointementsHeading">{user.name}'s Booked Services</Typography>
         </div>
       )}
     </Fragment>

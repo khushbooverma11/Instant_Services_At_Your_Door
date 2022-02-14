@@ -12,7 +12,7 @@ const AppointmentSuccess = () => {
       <CheckCircleIcon />
 
       <Typography>Employee Will reach to your Door...</Typography>
-      <Link to="/appointments">View Appointments</Link>
+      <Link to="/appointments">View Booked Services</Link>
     </div>
   );
 };

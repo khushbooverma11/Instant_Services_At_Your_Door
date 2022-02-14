@@ -11,11 +11,9 @@ import {
     UPDATE_APPOINTMENT_REQUEST,
     UPDATE_APPOINTMENT_SUCCESS,
     UPDATE_APPOINTMENT_FAIL,
-    UPDATE_APPOINTMENT_RESET,
     DELETE_APPOINTMENT_REQUEST,
     DELETE_APPOINTMENT_SUCCESS,
     DELETE_APPOINTMENT_FAIL,
-    DELETE_APPOINTMENT_RESET,
     APPOINTMENT_DETAILS_REQUEST,
     APPOINTMENT_DETAILS_SUCCESS,
     APPOINTMENT_DETAILS_FAIL,
@@ -112,12 +110,7 @@ export const UpdateAppointment = (id,appointment) => async (dispatch) => {
 export const deleteAppointment = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_APPOINTMENT_REQUEST, });
-
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    
     const { data } = await axios.delete(`/api/v1/admin/appointment/${id}`);
 
     dispatch({ type: DELETE_APPOINTMENT_SUCCESS, payload: data.success });

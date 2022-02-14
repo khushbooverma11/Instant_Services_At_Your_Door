@@ -37,7 +37,10 @@ console.log(typeof employees);
     dispatch(getAllUsers());
   }, [dispatch]);
   
-
+  let totalAmount = 0;
+  appointments && appointments.forEach((item)=>{
+    totalAmount+=item.totalPrice;
+  });
   const lineState = {
     labels: ["Initial Amount", "Amount Earned"],
     datasets: [
@@ -45,7 +48,7 @@ console.log(typeof employees);
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [0,4000],
+        data: [0,totalAmount],
       },
     ],
   };
@@ -74,7 +77,7 @@ console.log(typeof employees);
         <div className="dashboardSummary">
           <div>
             <p>
-              Total Amount <br /> ₹200
+              Total Amount <br /> ₹{totalAmount}
             </p>
           </div>
           <div className="dashboardSummaryBox2">
@@ -83,7 +86,7 @@ console.log(typeof employees);
              <p>{employees && employees.length}</p>
             </Link>
             <Link to="/admin/appointments">
-              <p>Appointments</p>
+              <p>Bookings</p>
               <p>{appointments && appointments.length}</p>
             </Link>
             <Link to="/admin/users">

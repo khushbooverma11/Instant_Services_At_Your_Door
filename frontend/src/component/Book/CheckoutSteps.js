@@ -8,11 +8,11 @@ import "./CheckoutSteps.css";
 const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
-      label: <Typography>Appointment Address Details</Typography>,
+      label: <Typography>Booking Address Details</Typography>,
       icon: <LocalShippingIcon />,
     },
     {
-      label: <Typography>Confirm Appointment</Typography>,
+      label: <Typography>Confirm Booking</Typography>,
       icon: <LibraryAddCheckIcon />,
     },
     {

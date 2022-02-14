@@ -44,7 +44,6 @@ const EmployeeDetails = ({ match }) => {
     precision:0.5,
   };
 
-  const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -127,7 +126,7 @@ const EmployeeDetails = ({ match }) => {
                   
                   <button disabled={employee.availability?false:true}
                   onClick={addToBookHandler}>
-                    Book Appointment
+                    Book Now
                   </button>
                 </div>
 

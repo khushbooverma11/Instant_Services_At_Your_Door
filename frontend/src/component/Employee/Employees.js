@@ -3,12 +3,9 @@ import  "./Employees.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearErrors,
-  getEmployeeDetails,
-  Employee,
   getEmployee
   
 } from "../../actions/employeeAction";
-import ReviewCard from "./ReviewCard.js";
 import EmployeeCard from "../Home/EmployeeCard"
 import Loader from "../layout/Loader/Loader";
 import Pagination from "react-js-pagination";
@@ -53,7 +50,7 @@ const Employees = ({match}) => {
       filteredEmployeesCount
     } = useSelector((state) => state.employees);
     
-    const {  user, isAuthenticated } = useSelector((state) => state.user);
+    const {  user } = useSelector((state) => state.user);
     const keyword =match.params.keyword;
 
     const setCurrentPageNo = (e) => {

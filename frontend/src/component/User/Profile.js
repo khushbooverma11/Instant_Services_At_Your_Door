@@ -41,7 +41,7 @@ const Profile = ({ history }) => {
               </div>
 
               <div>
-                <Link to="/orders">My Orders</Link>
+                <Link to="/appointments">My Booked Services</Link>
                 <Link to="/password/update">Change Password</Link>
               </div>
             </div>

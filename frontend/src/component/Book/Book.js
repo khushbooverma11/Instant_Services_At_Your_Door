@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import "./Book.css";
 import BookWorkerCard from "./BookWorkerCard";
 import { useSelector, useDispatch } from "react-redux";
-import { addWorkersToBook,removeWorkersFromBook } from "../../actions/bookAction";
+import { removeWorkersFromBook } from "../../actions/bookAction";
 import { Typography } from "@material-ui/core";
 import RemoveShoppingCartIcon from "@material-ui/icons/RemoveShoppingCart";
 import { Link } from "react-router-dom";
@@ -25,15 +25,15 @@ const Book = ({history}) => {
         <div className="emptyBook">
           <RemoveShoppingCartIcon />
 
-          <Typography>No  Appointment Yet</Typography>
-          <Link to="/Employees">View Employees</Link>
+          <Typography>No  Selected Services Yet</Typography>
+          <Link to="/Employees">View Services</Link>
         </div>
       ) : (
         <Fragment>
       
           <div className="bookPage">
             <div className="bookHeader">
-              <p>Employee</p>
+              <p>Service</p>
               <p>Avalability</p>
               <p>Subtotal</p>
             </div>

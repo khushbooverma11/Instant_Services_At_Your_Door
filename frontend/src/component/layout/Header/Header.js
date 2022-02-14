@@ -25,12 +25,12 @@ const Header = ({isAuthenticated,user}) => {
         </NavLink>
         </li>
         <li className="nav-item m-2">
-        <NavLink to="/contactUs" className="navlink">
+        <NavLink to="/contact" className="navlink">
           <div className="text"> Contact Us</div>
         </NavLink>
         </li>
         <li className="nav-item m-2">
-        <NavLink to="/contactUs" className="navlink">
+        <NavLink to="/about" className="navlink">
           <div className="text">About Us</div>
         </NavLink>
         </li>

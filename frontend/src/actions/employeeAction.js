@@ -1,5 +1,4 @@
 import axios from "axios";
-import { config } from "dotenv";
 import {
     ALL_EMPLOYEE_FAIL,
     ALL_EMPLOYEE_REQUEST,
@@ -25,9 +24,7 @@ import {
     ALL_REVIEW_REQUEST,
     ALL_REVIEW_SUCCESS,
     ALL_REVIEW_FAIL,
-    DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_SUCCESS,
-    DELETE_REVIEW_RESET,
     DELETE_REVIEW_FAIL,
     CLEAR_ERRORS,
 } from "../constants/employeeConstants";

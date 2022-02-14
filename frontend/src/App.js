@@ -6,7 +6,6 @@ import Footer from './component/layout/Footer/Footer';
 import Home from './component/Home/Home.js'
 import { BrowserRouter as Router,Route ,Switch} from 'react-router-dom';
 import WebFont from "webfontloader";
-import Loader from './component/layout/Loader/Loader';
 import EmployeeDetails from "./component/Employee/EmployeeDetails.js";
 import Employees from "./component/Employee/Employees";
 import Search from "./component/Employee/Search.js"
@@ -40,6 +39,9 @@ import ProcessAppointment from './component/Admin/ProcessAppointment';
 import UsersList from './component/Admin/UsersList';
 import UpdateUser from './component/Admin/UpdateUser';
 import EmployeeReviews from './component/Admin/EmployeeReviews';
+import Contact from './component/ContactAbout/Contact';
+import About from './component/ContactAbout/About';
+import NotFound from './component/layout/Not Found/NotFound';
 function App() {
   
   const{isAuthenticated,user}=useSelector(state=>state.user);
@@ -66,13 +68,23 @@ function App() {
     getStripeApikey();
 
     }, []);
-
+   
+    window.addEventListener("contextmenu", (e)=>e.preventDefault());
   return (
     <Router>
       
       <Header isAuthenticated={isAuthenticated}user={user}/>
       {isAuthenticated&&<UserOptions user={user}/>}
-    <Route  exact path="/" component={Home}/>
+      
+      {stripeApiKey && (
+      <Elements stripe={loadStripe(stripeApiKey)}>
+      <ProtectedRoute exact path="/process/payment" component={Payment} />
+       </Elements>
+    )}
+
+
+   <Switch>
+   <Route  exact path="/" component={Home}/>
     <Route  exact path="/Employee/:id" component={EmployeeDetails}/>
     <Route exact path="/Employees" component={Employees}/>
     <Route  path="/Employees/:keyword" component={Employees}/>
@@ -83,23 +95,16 @@ function App() {
     <Route exact path="/password/forgot" component={ForgotPassword} />
     <Route exact path="/password/reset/:token" component={ResetPassword} />
     <Route exact path="/login" component={LoginSignUp}/>
-    <Route exact path="/book" component={Book} /> 
-
+    <Route exact path="/book" component={Book} />
+    <Route exact path="/contact" component={Contact}/> 
+    <Route exact path="/about" component={About}/> 
     <ProtectedRoute exact path="/appointing" component={Appointing} />
-    
-    {stripeApiKey && (
-      <Elements stripe={loadStripe(stripeApiKey)}>
-      <ProtectedRoute exact path="/process/payment" component={Payment} />
-       </Elements>
-    )}
-
    <ProtectedRoute exact path="/success" component={AppointmentSuccess} />
    <ProtectedRoute exact path="/appointments" component={MyAppointments} />
-   <Switch>
+
    <ProtectedRoute exact path="/appointment/confirm" component={ConfirmAppointment} />
    <ProtectedRoute exact path="/appointment/:id" component={AppointmentDetails} />
     
-   </Switch>
    <ProtectedRoute
           isAdmin={true}
           exact
@@ -159,6 +164,13 @@ function App() {
           isAdmin={true}
           component={EmployeeReviews}
         />
+
+        <Route
+          component={window.location.pathname === '/process/payment' ? null: NotFound
+        }
+        />
+   </Switch>
+   
       <Footer/>
 
       </Router>

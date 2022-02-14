@@ -41,11 +41,11 @@ const Appointing = ({history}) => {
   };
 
     return <Fragment>
-        <MetaData title="Appointment Address Details" />
+        <MetaData title="Booking Address Details" />
         <CheckoutSteps activeStep={0} />
          <div className="appointingContainer">
         <div className="appointingBox">
-          <h2 className="appointingHeading">Appointment Details</h2>
+          <h2 className="appointingHeading">Booking Details</h2>
 
           <form
             className="appointingForm"

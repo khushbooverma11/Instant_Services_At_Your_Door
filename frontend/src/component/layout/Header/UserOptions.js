@@ -6,7 +6,6 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { useHistory } from "react-router-dom";
 import { useAlert } from "react-alert";
@@ -22,7 +21,7 @@ const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
 
   const options = [
-    { icon: <ListAltIcon />, name: "Appointments", func: orders },
+    { icon: <ListAltIcon />, name: "Booked", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
     {
       icon: (

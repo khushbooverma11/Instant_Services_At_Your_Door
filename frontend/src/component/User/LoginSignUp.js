@@ -8,7 +8,6 @@ import FaceIcon from '@material-ui/icons/Face'
 import { useDispatch,useSelector } from 'react-redux';
 import { clearErrors,login,register } from '../../actions/userAction'
 import { useAlert } from 'react-alert'
-import LocationOn from '@material-ui/icons/LocationOn';
 
 const LoginSignUp = ({history,location}) => {
 

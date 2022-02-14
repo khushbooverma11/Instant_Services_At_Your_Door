@@ -29,13 +29,13 @@ const AppointmentDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Appointment Details" />
+          <MetaData title="Booking Details" />
           <div className="appointmentDetailsPage">
             <div className="appointmentDetailsContainer">
               <Typography component="h1">
-                Appointment #{appointment && appointment._id}
+                Booking #{appointment && appointment._id}
               </Typography>
-              <Typography>Appointing Info</Typography>
+              <Typography>Booking Info</Typography>
               <div className="appointmentDetailsContainerBox">
                 <div>
                   <p>Name:</p><span>{appointment.user && appointment.user.name}</span>
@@ -78,7 +78,7 @@ const AppointmentDetails = ({ match }) => {
                 </div>
               </div>
 
-              <Typography>Appointment Status</Typography>
+              <Typography> Status</Typography>
               <div className="appointmentDetailsContainerBox">
                 <div>
                   <p
@@ -95,7 +95,7 @@ const AppointmentDetails = ({ match }) => {
             </div>
 
             <div className="appointmentDetailsBookWorkers">
-              <Typography>Appointment Workers:</Typography>
+              <Typography>Booked Workers:</Typography>
               <div className="appointmentDetailsBookWorkersContainer">
                 {appointment.appointedEmployees &&
                   appointment.appointedEmployees.map((worker) => (
